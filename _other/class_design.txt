@@ -1,0 +1,47 @@
+SERVER SIDE
+    Server
+    - IP: str
+    - PORT: int
+    - ADDR: tuple
+    - MAX_CON: int
+    - SOCK: socket_object
+    - conn_clients: list: str
+    - active_con: int
+    - msg_hist: list
+    - handle_client()
+    - handle_discon()
+
+    Client
+    - CONN: socket_object
+    - ADDR: str
+    - IS_CONNECTED: boolean
+    - listen_msg()
+
+    Console
+    - t = blessings.Terminal()
+    - print_starting()
+    - print_listening()
+    - print_new_con()
+    - print_new_msg()
+    - print_discon()
+    - print_active_con()
+
+CLIENT SIDE
+    Client
+        - IP: str
+        - PORT = int
+        - ADDR = tuple
+        - SOCK = socket_object
+        - IS_CONNECTED: str
+        - send_msg(msg) .Send msg to SERVER
+        - listen_msg() .Listen to messages from SERVER
+
+    Server
+        - IP: str
+        - PORT: int
+        - ADDR = tuple
+	- change_ADDR(ip, port)
+
+    Console
+	- print_starting()
+
