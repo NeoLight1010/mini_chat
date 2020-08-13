@@ -1,4 +1,3 @@
-#!./venv/bin/python
 import threading
 import socket
 import blessings # Module to style and control the terminal/console.
@@ -89,7 +88,7 @@ class Server():
 
     def __handle_client(self, conn, addr):
         client = Client(conn, addr) # Initialize Client object.
-        self.__receive_user_name()
+        self.__receive_user_name(client)
         self.conn_clients.append(client.CONN)
         
         # Listen to messages from CLIENT

@@ -2,6 +2,11 @@ import tkinter as tk
 from tkinter import messagebox
 
 
+class InternalAlerts:
+    def __init__(self):
+        self.start_backend = 'START_BACKEND'
+
+
 class RowFrame(tk.Frame):
     def __init__(self, master, master_width, bg='', height=1, anchor='center'):
         super().__init__(master, width=master_width, height=height)
@@ -35,7 +40,11 @@ class FontType:
 
 
 class LoginWindow:
-    def __init__(self):
+    def __init__(self, linker):
+        self.linker = linker
+        self.linker.send_notif("GUI linker connected")
+        ialerts = InternalAlerts()
+
         self.width = 600
         self.height = 450
         n_of_rows = 3
@@ -85,10 +94,9 @@ class LoginWindow:
         def check_user_name():
             name = self.user_name.get()
             if name:
-                if name != 'admin':
-                    tk.messagebox.showerror(title='Incorrect username', message='Incorrect username: ' + name)
-                else:
-                    tk.messagebox.showinfo(title='Hi admin!', message="Hi admin!")
+                message='Your name is correct'
+                messagebox.showinfo(message=message)
+                self.linker.send_notif(ialerts.start_backend, name)
 
         self.login_btn = tk.Button(self.login_btn_frame, text='Login', command=check_user_name)
         self.login_btn.grid()
