@@ -2,25 +2,25 @@ import tkinter as tk
 # from tkinter import messagebox
 
 
-class InternalAlerts:
-    def __init__(self):
-        self.start_backend = 'START_BACKEND'
-        self.disconnect = 'DISCONNECT'
-
-
 class RowFrame(tk.Frame):
-    def __init__(self, master, master_width, bg='', height=1, anchor='center'):
-        super().__init__(master, width=master_width, height=height)
+    def __init__(self, master, bg='', height=1, anchor='center'):
+        self.width = master.winfo_reqwidth()
+        super().__init__(master, width=self.width, height=height)
         self.master = master
         self.height = height
-        self.width = master_width
         self.bg = bg
 
         if self.bg:
             self.configure(bg=bg)
-            
+
         self.grid_propagate(0)
         self.grid_anchor(anchor)
+
+
+class InternalAlerts:
+    def __init__(self):
+        self.start_backend = 'START_BACKEND'
+        self.disconnect = 'DISCONNECT'
 
 
 class FontType:
@@ -61,10 +61,8 @@ class LoginWindow(tk.Frame):
         self.tertiary_color = 'black'
         self.main_text_color = 'white'
 
-        # TODO: Review geometry, resizable and title functions.
-        # self.root.geometry(f'{self.width}x{self.height}')
-        # self.root.resizable(width=0, height=0)
-        # self.root.title('minichat - login')
+        self.gui.root.resizable(width=0, height=0)
+        self.gui.root.title('minichat - login')
 
         # Define main font type.
         main_font_size = 15
@@ -73,14 +71,14 @@ class LoginWindow(tk.Frame):
 
         # Set layout.
         # 1st row frame
-        title_frame = RowFrame(self, self.width, bg=self.main_bg_color, height=self.row_height, anchor='s')
+        title_frame = RowFrame(self, bg=self.main_bg_color, height=self.row_height, anchor='s')
         title_frame.grid(row=1)
 
         title = tk.Label(title_frame, text='MiniChat', font=font_type.h1())
         title.grid(sticky='')
 
         # 2nd row frame
-        entry_frame = RowFrame(self, self.width, bg=self.main_bg_color, height=self.row_height, anchor='s')
+        entry_frame = RowFrame(self, bg=self.main_bg_color, height=self.row_height, anchor='s')
         entry_frame.grid(row=2)
 
         tk.Label(entry_frame, text='Username:', font=font_type.p()).grid()
@@ -89,7 +87,7 @@ class LoginWindow(tk.Frame):
         user_name_entry.grid(row=2)
 
         # 3rd row frame
-        login_btn_frame = RowFrame(self, self.width, bg=self.main_bg_color, height=self.row_height, anchor='n')
+        login_btn_frame = RowFrame(self, bg=self.main_bg_color, height=self.row_height, anchor='n')
         login_btn_frame.grid(row=3)
 
         def check_user_name():

@@ -4,9 +4,9 @@ import blessings
 import atexit
 from time import sleep
 
-HEADER = 128 # Message length limit
-FORMAT = "utf-8" # Format of sent messages.
-DISCONNECT = "DISCONNECT" # Message to request disconnection from the server.
+HEADER = 128  # Message length limit
+FORMAT = "utf-8"  # Format of sent messages.
+DISCONNECT = "DISCONNECT"  # Message to request disconnection from the server.
 
 default_port = 5050
 

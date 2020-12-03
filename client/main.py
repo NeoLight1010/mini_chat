@@ -27,6 +27,7 @@ def linker_thread_func(linker, actions):
 
 
 # linker actions v
+# TODO: Move linker actions to Linker class.
 def start_backend(user_name):
     backend = Thread(target=backend_thread, args=[user_name])
     backend.start()
@@ -54,12 +55,12 @@ if __name__ == '__main__':
     linker_thread = Thread(target=linker_thread_func, args=[linker_obj, linker_act])
     linker_thread.start()
 
-    # Set up GuiHandler and gui threads.
+    # Set up GuiHandler and link it to Linker.
     login_window = LoginWindow
     chat_window = ChatWindow
     windows = [login_window, chat_window]
 
     gui_handler = GuiHandler(linker_obj, windows)
-    print("If you see this, gui has been created")
     linker_obj.set_gui(gui_handler)
+    gui_handler.switch_frame(1)  # For testing.
     gui_handler.start()
